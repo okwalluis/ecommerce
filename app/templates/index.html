@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
@@ -12,7 +12,21 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1> Hola mundo, desde un archivo HTML </h1>
+                <h1> {{message}} </h1>
+                <ul class="list-group">
+                    {%for product in products %}
+                        <li class="list-group-item">
+                            {{product.title}}
+                            <!-- Este es un comentario html -->
+                            {# Este es un comentario de Django #}
+                            {% if product.stock %}
+                                <span class="text-success">Disponible</span>
+                            {% else %}
+                                <span class="text-danger">No disponible</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

@@ -6,5 +6,12 @@ from django.http import HttpResponse
 def index(request):
     #return HttpResponse('Hola Mundo!')
     return render(request, 'index.html', {
-    # context
+    # context= diccionario
+        'message':'Listado de productos.',
+        'title':'Productos',
+        'products':[
+            {'title':'playera','price':5,'stock':True}, #producto
+            {'title':'Camisa','price':7,'stock':True},
+            {'title':'Mochila','price':20,'stock':False},
+        ]
     })
