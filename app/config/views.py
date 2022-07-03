@@ -30,6 +30,9 @@ def index(request):
     })
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+        
     #print(request.method)
     if request.method == 'POST':
         username = request.POST.get('username') # diccionario
@@ -55,14 +58,19 @@ def logout_view(request):
     return redirect('login')
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
     form = RegisterForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
-        username = form.cleaned_data.get('username') #diccionario
-        email = form.cleaned_data.get('email')
-        password = form.cleaned_data.get('password')
+        
+        #username = form.cleaned_data.get('username') #diccionario
+        #email = form.cleaned_data.get('email')
+        #password = form.cleaned_data.get('password')
 
-        user = User.objects.create_user(username,email,password)
+        #user = User.objects.create_user(username,email,password)
+        user = form.save()
 
         if user:
             login(request, user)
