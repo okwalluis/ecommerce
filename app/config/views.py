@@ -1,4 +1,5 @@
 from email import message
+import email
 import imp
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -7,9 +8,14 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth import login #genera la sesion
 from django.contrib.auth import logout
-from django.contrib.auth import authenticate #autentifica el usuario
+from django.contrib.auth import authenticate
+
+from config.forms import RegisterForm #autentifica el usuario
 
 #Permite responder a una url
+
+from .forms import RegisterForm
+from django.contrib.auth.models import User
 
 def index(request):
     #return HttpResponse('Hola Mundo!')
@@ -47,3 +53,24 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Sesión cerrada exitosamente')
     return redirect('login')
+
+def register(request):
+    form = RegisterForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        username = form.cleaned_data.get('username') #diccionario
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+
+        user = User.objects.create_user(username,email,password)
+
+        if user:
+            login(request, user)
+            messages.success(request, 'Usuario creado exitosamente')
+            return redirect('index')
+        #print(username)
+        #print(email)
+        #print(password)
+    return render(request, 'users/register.html', {
+        'form':form
+    })
