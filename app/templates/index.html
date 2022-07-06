@@ -2,19 +2,31 @@
 
 {% block content %}
 <div class="col">
+    <h4 class="text-center">{{ message }}</h4>
+        <div class="row">
+            {%for product in product_list %}
+                <div class="col-3 mt-5">
+                    {% include 'products/snippets/product.html' %}
+                </div>
+            {% endfor %}
+        </div>
+    <!--
     <ul class="list-group">
-        {%for product in products %}
+        {%for product in product_list %}
             <li class="list-group-item">
                 {{product.title}}
-                <!-- Este es un comentario html -->
-                {# Este es un comentario de Django #}
-                {% if product.stock %}
-                    <span class="text-success">Disponible</span>
-                {% else %}
-                    <span class="text-danger">No disponible</span>
-                {% endif %}
+                # Este es un comentario html
+                #{# Este es un comentario de Django #}
+                #{% if product.stock %}
+                #    <span class="text-success">Disponible</span>
+                #{% else %}
+                #    <span class="text-danger">No disponible</span>
+                #{% endif %}
+                
+                <span class="text-success">${{ product.price }}</span>
             </li>
         {% endfor %}
     </ul>
+    -->
 </div>
 {% endblock content %}

@@ -15,18 +15,19 @@ from config.forms import RegisterForm #autentifica el usuario
 #Permite responder a una url
 
 from .forms import RegisterForm
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from products.models import Product
 
 def index(request):
+
+    products = Product.objects.all().order_by('-id')
+
     #return HttpResponse('Hola Mundo!')
     return render(request, 'index.html', {
     # context= diccionario
+        'message':'Listado de productos',
         'title':'Productos',
-        'products':[
-            {'title':'playera','price':5,'stock':True}, #producto
-            {'title':'Camisa','price':7,'stock':True},
-            {'title':'Mochila','price':20,'stock':False},
-        ]
+        'products': products
     })
 
 def login_view(request):
