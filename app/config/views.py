@@ -1,22 +1,22 @@
-from email import message
-import email
-import imp
-from django.shortcuts import redirect
 from django.shortcuts import render
+from django.shortcuts import redirect
 
-#from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login #genera la sesion
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 
+#from django.http import HttpResponse
+
 from config.forms import RegisterForm #autentifica el usuario
-
 #Permite responder a una url
-
 from .forms import RegisterForm
 #from django.contrib.auth.models import User
+from users.models import User
+
 from products.models import Product
+
+
 
 def index(request):
 

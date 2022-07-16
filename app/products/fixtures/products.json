@@ -1,0 +1,26 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "Cartuchera rosada",
+        "description": "Cartuchera rosa",
+        "price": "1.80",
+        "slug": "cartuchera",
+        "image": "products/cartuchera.png",
+        "created_at": "2022-07-04T00:54:05.564Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "Cartuchera roja",
+        "description": "Cartuchera con lapices",
+        "price": "5.00",
+        "slug": "cartuchera-239c7852",
+        "image": "products/cartuchera2.jpg",
+        "created_at": "2022-07-04T01:40:49.252Z"
+    }
+}
+]

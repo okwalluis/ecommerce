@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'products',
+    'categories',
+    'users',
+    'carts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,15 +55,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+#Con esto le decimos a django que use nuestro modelo y no el modelo User de django
+AUTH_USER_MODEL = 'users.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'products', 'templates'),
-            os.path.join(BASE_DIR, 'products', 'snippets'),
-#            'templates',
-#            'products/templates',
-#            'products/snippets',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')
             ],
         'APP_DIRS': True,
         'OPTIONS': {

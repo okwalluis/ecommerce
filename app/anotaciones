@@ -1,0 +1,50 @@
+Para hacer respaldos de nuestros datos
+python manage.py dumpdata
+
+python manage.py dumpdata products.product
+
+almacenar la informacion en un archivo
+python manage.py dumpdata products.product --format=json
+python manage.py dumpdata products.product --format=json --indent=4
+python manage.py dumpdata products.product --format=json --indent=4 >> products/fixtures/products.json
+
+
+Recuperar informacion en base a un respaldo
+python manage.py loaddata products.json
+
+
+Proxy model es un modelo que hereda de otro pero no genera tabla en base de datos.
+Se utiliza cuando tengamos la necesidad de extender nuevas funcionalidades
+Ej.: Clase Customer que hereda de User.
+
+python manage.py shell
+
+from users.models import Customer
+customer = Customer.objets.get(pk=1)
+customer
+
+customer.get_produts()
+
+
+RElacion 1 a 1
+Se utiliza cuando tengamos la necesidad de extender nuevos atributos hacia nuestro modelo
+Creando nuevo profile desde el shell
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.get(pk=1)
+>>> user
+<User: own>
+>>>
+>>> from users.models import Profile
+>>> profile = Profile.objects.create(user=user, biografia='Desarrollador de software')
+>>> profile.id
+1
+>>>
+>>> user
+<User: own>
+>>> user.profile
+<Profile: Profile object (1)>
+>>> user.profile.biografia
+'Desarrollador de software'
+>>>
+>>> profile.user.username
+'own'
