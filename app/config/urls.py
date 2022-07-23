@@ -19,7 +19,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #producto
     path('productos/', include('products.urls')),
-    path('carrito/', include('carts.urls'))
+    path('carrito/', include('carts.urls')),
+    path('orden/', include('orders.urls'))
 ]
 
 #permite mostrar las imagenes en el template
