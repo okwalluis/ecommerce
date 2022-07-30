@@ -5,16 +5,11 @@ from shipping_addresses.models import ShippingAddress
 # Create your models here.
 from users.models import User
 from carts.models import Cart
-from enum import Enum
+
+
+from .common import OrderStatus
+from .common import choices
 from django.db.models.signals import pre_save
-
-class OrderStatus(Enum):
-    CREATED = 'CREATED'
-    PAYED = 'PAYED'
-    COMPLETED = 'COMPLETED'
-    CANCELED = 'CANCELED'
-
-choices = [(tag,tag.value) for tag in OrderStatus]
 
 class Order(models.Model):
     order_id = models.CharField(max_length=100, null=False, blank=False, unique=True)
@@ -34,6 +29,14 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_id
+
+    def cancel(self):
+        self.status = OrderStatus.CANCELED
+        self.save()
+    
+    def complete(self):
+        self.status = OrderStatus.COMPLETED
+        self.save()
 
     def get_or_set_shipping_address(self):
         if self.shipping_address:

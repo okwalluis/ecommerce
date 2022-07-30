@@ -2,6 +2,8 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
+from orders.common import OrderStatus
+
 #AbstractUser
 class User(AbstractUser):
     def get_full_name(self):
@@ -15,6 +17,16 @@ class User(AbstractUser):
 
     def has_shipping_address(self):
         return self.shipping_address is not None
+
+    def orders_completed(self):
+        return self.order_set.filter(status=OrderStatus.COMPLETED).order_by('-id')
+
+    def has_shipping_addreses(self):
+        return self.shippingaddress_set.exists()
+
+    @property
+    def addresses(self):
+        return self.shippingaddress_set.all()
 
 # Create your models here.
 class Customer(User):
